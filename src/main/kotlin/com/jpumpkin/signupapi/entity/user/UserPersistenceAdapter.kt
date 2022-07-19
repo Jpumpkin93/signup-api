@@ -1,6 +1,7 @@
 package com.jpumpkin.signupapi.entity.user
 
 import com.jpumpkin.signupapi.domain.User
+import com.jpumpkin.signupapi.extension.findByIdOrThrow
 import org.modelmapper.ModelMapper
 import org.springframework.stereotype.Component
 
@@ -32,4 +33,6 @@ class UserPersistenceAdapter(
         return modelMapper.map(userJpaEntity, User::class.java)
     }
 
+    override fun findById(userId: Long): User =
+        modelMapper.map(userRepository.findByIdOrThrow(userId), User::class.java)
 }

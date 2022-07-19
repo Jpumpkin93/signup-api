@@ -5,6 +5,7 @@ import com.jpumpkin.signupapi.component.JwtProvider
 import com.jpumpkin.signupapi.controller.dto.request.LoginByEmailRequest
 import com.jpumpkin.signupapi.controller.dto.request.LoginByMobileNumberRequest
 import com.jpumpkin.signupapi.controller.dto.request.SignupRequest
+import com.jpumpkin.signupapi.controller.dto.response.MeResponse
 import com.jpumpkin.signupapi.domain.User
 import com.jpumpkin.signupapi.entity.user.UserPort
 import com.jpumpkin.signupapi.exception.ApiException
@@ -57,4 +58,11 @@ class UserService(
             .also { verifyPassword(request.password, it) }
             .run { return jwtProvider.createAccessToken(user.id!!) }
     }
+
+    override fun me(token: String): MeResponse =
+        MeResponse.from(
+            userPort.findById(
+                jwtProvider.getUserIdByResolveToken(token)
+            )
+        )
 }

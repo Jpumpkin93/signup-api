@@ -8,4 +8,5 @@ interface UserPort {
     fun existsByEmail(email: String): Boolean
     fun findByMobileNumber(mobileNumber: String): User?
     fun findByEmail(email: String): User?
+    fun findById(userId: Long): User
 }
