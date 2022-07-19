@@ -1,5 +1,6 @@
-package com.jpumpkin.signupapi.entity
+package com.jpumpkin.signupapi.entity.user
 
+import com.jpumpkin.signupapi.entity.BaseEntity
 import javax.persistence.Column
 import javax.persistence.Entity
 

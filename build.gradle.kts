@@ -23,12 +23,18 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
 
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
 
     implementation("org.modelmapper:modelmapper:2.4.5")
     implementation("io.klogging:klogging-jvm:0.4.9")
+    implementation("com.googlecode.libphonenumber:libphonenumber:8.12.51")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

@@ -18,4 +18,12 @@ class ControllerAdvice {
             ExceptionResponse(ApiCode.INTERNAL_SERVER_ERROR),
             HttpStatus.INTERNAL_SERVER_ERROR
         )
+
+    @ExceptionHandler(ApiException::class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    fun apiException(e: ApiException) =
+        ResponseEntity(
+            ExceptionResponse(e.code, e.message),
+            HttpStatus.BAD_REQUEST
+        )
 }
