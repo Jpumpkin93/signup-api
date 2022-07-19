@@ -3,6 +3,8 @@ package com.jpumpkin.signupapi.controller
 import com.jpumpkin.signupapi.common.ApiCode
 import com.jpumpkin.signupapi.controller.dto.request.SignupRequest
 import com.jpumpkin.signupapi.common.ApiResponse
+import com.jpumpkin.signupapi.controller.dto.request.LoginByEmailRequest
+import com.jpumpkin.signupapi.controller.dto.request.LoginByMobileNumberRequest
 import com.jpumpkin.signupapi.service.UserUseCase
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.GetMapping
@@ -23,10 +25,14 @@ class UserController(
     ) = ok(ApiResponse(ApiCode.SUCCESS, userUseCase.signup(request)))
 
     @PostMapping("/login/mobile-number")
-    fun loginByMobileNumber() = ok()
+    fun loginByMobileNumber(
+        @RequestBody request: LoginByMobileNumberRequest
+    ) = ok(ApiResponse(ApiCode.SUCCESS, userUseCase.loginByMobileNumber(request)))
 
     @PostMapping("/login/email")
-    fun loginByEmail() = ok()
+    fun loginByEmail(
+        @RequestBody request: LoginByEmailRequest
+    ) = ok(ApiResponse(ApiCode.SUCCESS, userUseCase.loginByEmail(request)))
 
     @GetMapping("/me")
     fun me() = ok()

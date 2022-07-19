@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Configuration
 class ModelMapperConfig {
 
     @Bean
-    fun modelMapper(): ModelMapper =
-        ModelMapper().apply {
-            configuration.isFieldMatchingEnabled = true
-            configuration.fieldAccessLevel = org.modelmapper.config.Configuration.AccessLevel.PRIVATE
-        }
+    fun modelMapper(): ModelMapper {
+        val modelMapper = ModelMapper()
+            modelMapper.configuration.isFieldMatchingEnabled = true
+            modelMapper.configuration.fieldAccessLevel = org.modelmapper.config.Configuration.AccessLevel.PRIVATE
+        return modelMapper
+    }
 }

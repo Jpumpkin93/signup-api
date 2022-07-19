@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
-    id("org.jetbrains.kotlin.plugin.noarg") version "1.6.21"
+    kotlin("plugin.noarg") version "1.6.21"
 }
 
 group = "com.jpumpkin"
@@ -30,8 +30,9 @@ dependencies {
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
 
-    implementation("org.modelmapper:modelmapper:2.4.5")
-    implementation("io.klogging:klogging-jvm:0.4.9")
+    implementation("org.modelmapper:modelmapper:3.1.0")
+    implementation("io.github.microutils:kotlin-logging:1.12.5")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
     implementation("com.googlecode.libphonenumber:libphonenumber:8.12.51")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
 
@@ -42,6 +43,11 @@ dependencies {
 allOpen {
     annotation("javax.persistence.Entity")
     annotation("javax.persistence.MappedSuperclass")
+}
+
+noArg {
+    annotation("com.jpumpkin.signupapi.common.Domain")
+    invokeInitializers = true
 }
 
 tasks.withType<KotlinCompile> {

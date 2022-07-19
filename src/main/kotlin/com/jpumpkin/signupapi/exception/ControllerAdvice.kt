@@ -1,6 +1,7 @@
 package com.jpumpkin.signupapi.exception
 
 import com.jpumpkin.signupapi.common.ApiCode
+import mu.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -11,13 +12,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class ControllerAdvice {
 
+    companion object: KLogging()
+
     @ExceptionHandler(Exception::class)
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
-    fun unknownException(e: Exception) =
-        ResponseEntity(
+    fun unknownException(e: Exception): ResponseEntity<ExceptionResponse> {
+        logger.error("알 수 없는 오류 발생 message: ${e.message}, class: ${e.javaClass.name}")
+        return ResponseEntity(
             ExceptionResponse(ApiCode.INTERNAL_SERVER_ERROR),
             HttpStatus.INTERNAL_SERVER_ERROR
         )
+    }
 
     @ExceptionHandler(ApiException::class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

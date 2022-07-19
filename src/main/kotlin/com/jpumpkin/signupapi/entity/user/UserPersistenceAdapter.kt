@@ -21,4 +21,15 @@ class UserPersistenceAdapter(
 
     override fun existsByEmail(email: String): Boolean =
         userRepository.existsByEmail(email)
+
+    override fun findByMobileNumber(mobileNumber: String): User? {
+        val userJpaEntity = userRepository.findByMobileNumber(mobileNumber) ?: return null
+        return modelMapper.map(userJpaEntity, User::class.java)
+    }
+
+    override fun findByEmail(email: String): User? {
+        val userJpaEntity = userRepository.findByEmail(email) ?: return null
+        return modelMapper.map(userJpaEntity, User::class.java)
+    }
+
 }

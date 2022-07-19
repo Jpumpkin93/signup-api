@@ -6,6 +6,8 @@ enum class ApiCode(
 ) {
     SUCCESS(200, "success"),
 
+    NOT_EXIST_USER(1000, "not exist user"),
+    INVALID_PASSWORD(1001, "invalid password"),
 
     DUPLICATE_MOBILE_NUMBER(3000, "duplicate mobile number"),
     DUPLICATE_EMAIL(3001, "duplicate email"),
