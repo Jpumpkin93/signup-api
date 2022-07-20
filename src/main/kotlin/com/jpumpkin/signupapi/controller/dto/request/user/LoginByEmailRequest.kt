@@ -1,4 +1,4 @@
-package com.jpumpkin.signupapi.controller.dto.request
+package com.jpumpkin.signupapi.controller.dto.request.user
 
 import javax.validation.constraints.NotBlank
 

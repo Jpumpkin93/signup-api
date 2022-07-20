@@ -1,4 +1,4 @@
-package com.jpumpkin.signupapi.controller.dto.request
+package com.jpumpkin.signupapi.controller.dto.request.user
 
 import com.jpumpkin.signupapi.domain.User
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -13,9 +13,7 @@ data class SignupRequest(
     @field:NotBlank
     val password: String,
     @field:NotBlank
-    val name: String,
-    @field:NotBlank
-    val mobileNumber: String
+    val name: String
 ) {
 
     fun toUser(passwordEncoder: PasswordEncoder, formattedMobileNumber: String) = User(

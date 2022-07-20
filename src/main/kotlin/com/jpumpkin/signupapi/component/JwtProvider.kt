@@ -1,7 +1,9 @@
 package com.jpumpkin.signupapi.component
 
 import com.jpumpkin.signupapi.common.ApiCode
+import com.jpumpkin.signupapi.domain.AuthCode
 import com.jpumpkin.signupapi.exception.ApiException
+import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -23,21 +25,22 @@ class JwtProvider(
             .signWith(SignatureAlgorithm.HS256, secretKey)
             .compact()
 
-    fun getUserIdByResolveToken(token: String): Long =
-        try {
-            Jwts
-                .parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJws(token.replace("Bearer ", ""))
-                .body
-                .subject
-                .toLong()
-        } catch (e: ExpiredJwtException) {
-            throw ApiException(ApiCode.TOKEN_EXPIRED)
-        }
 
+
+    fun createReferrerToken(authCode: AuthCode): String =
+        Jwts.builder()
+            .setClaims(
+                mapOf(
+                    Pair("mobileNumber", authCode.mobileNumber),
+                    Pair("purpose", authCode.purpose)
+                )
+            )
+            .setExpiration(Date(System.currentTimeMillis() + REFERRER_TOKEN_VALID_TIME))
+            .signWith(SignatureAlgorithm.HS256, secretKey)
+            .compact()
 
     companion object {
         const val ACCESS_TOKEN_VALID_TIME = 1000L * 60 * 60 * 3
+        const val REFERRER_TOKEN_VALID_TIME = 1000L * 60 * 5
     }
 }

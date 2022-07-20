@@ -1,4 +1,4 @@
-package com.jpumpkin.signupapi.controller.dto.response
+package com.jpumpkin.signupapi.controller.dto.response.user
 
 import com.jpumpkin.signupapi.domain.User
 

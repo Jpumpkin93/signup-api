@@ -1,10 +1,11 @@
 package com.jpumpkin.signupapi.controller
 
 import com.jpumpkin.signupapi.common.ApiCode
-import com.jpumpkin.signupapi.controller.dto.request.SignupRequest
+import com.jpumpkin.signupapi.controller.dto.request.user.SignupRequest
 import com.jpumpkin.signupapi.common.ApiResponse
-import com.jpumpkin.signupapi.controller.dto.request.LoginByEmailRequest
-import com.jpumpkin.signupapi.controller.dto.request.LoginByMobileNumberRequest
+import com.jpumpkin.signupapi.controller.dto.request.user.LoginByEmailRequest
+import com.jpumpkin.signupapi.controller.dto.request.user.LoginByMobileNumberRequest
+import com.jpumpkin.signupapi.controller.dto.request.user.UpdatePasswordRequest
 import com.jpumpkin.signupapi.service.UserUseCase
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.GetMapping
@@ -22,8 +23,9 @@ class UserController(
 
     @PostMapping("/signup")
     fun signup(
+        @RequestHeader("referrer-token") token: String,
         @RequestBody request: SignupRequest
-    ) = ok(ApiResponse(ApiCode.SUCCESS, userUseCase.signup(request)))
+    ) = ok(ApiResponse(ApiCode.SUCCESS, userUseCase.signup(token, request)))
 
     @PostMapping("/login/mobile-number")
     fun loginByMobileNumber(
@@ -41,5 +43,8 @@ class UserController(
     ) = ok(ApiResponse(ApiCode.SUCCESS, userUseCase.me(token)))
 
     @PutMapping("/password")
-    fun updatePassword() = ok()
+    fun updatePassword(
+        @RequestHeader("referrer-token") token: String,
+        @RequestBody request: UpdatePasswordRequest
+    ) = ok(ApiResponse(ApiCode.SUCCESS, userUseCase.updatePassword(token, request)))
 }

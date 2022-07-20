@@ -7,8 +7,12 @@ import com.jpumpkin.signupapi.common.Domain
 class User(
     val email: String,
     val nickName: String,
-    val password: String,
+    var password: String,
     val name: String,
     val mobileNumber: String
 ): BaseDomain() {
+
+    fun updatePassword(password: String) {
+        this.password = password
+    }
 }

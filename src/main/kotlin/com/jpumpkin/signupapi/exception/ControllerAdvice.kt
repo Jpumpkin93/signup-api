@@ -2,6 +2,7 @@ package com.jpumpkin.signupapi.exception
 
 import com.jpumpkin.signupapi.common.ApiCode
 import mu.KLogging
+import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -29,6 +30,14 @@ class ControllerAdvice {
     fun apiException(e: ApiException) =
         ResponseEntity(
             ExceptionResponse(e.code, e.message),
+            HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(EmptyResultDataAccessException::class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    fun emptyResultDataAccessException(e: EmptyResultDataAccessException) =
+        ResponseEntity(
+            ExceptionResponse(ApiCode.BAD_REQUEST),
             HttpStatus.BAD_REQUEST
         )
 }
