@@ -12,6 +12,7 @@ enum class ApiCode(
 
     EXPIRED_TOKEN(2000, "token expired"),
     INVALID_TOKEN_PURPOSE(2001, "invalid token purpose"),
+    INVALID_TOKEN(2002, "invalid token"),
 
     DUPLICATE_MOBILE_NUMBER(3000, "duplicate mobile number"),
     DUPLICATE_EMAIL(3001, "duplicate email"),

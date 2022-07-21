@@ -5,6 +5,7 @@ import com.jpumpkin.signupapi.exception.ApiException
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
@@ -26,6 +27,8 @@ class JwtVerifier(
                 .toLong()
         } catch (e: ExpiredJwtException) {
             throw ApiException(ApiCode.EXPIRED_TOKEN)
+        } catch (e: SignatureException) {
+            throw ApiException(ApiCode.INVALID_TOKEN)
         }
 
     fun getReferrerTokenClaims(token: String): Claims =

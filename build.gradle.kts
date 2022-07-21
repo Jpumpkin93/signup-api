@@ -35,6 +35,8 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
     implementation("com.googlecode.libphonenumber:libphonenumber:8.12.51")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
 
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -47,7 +49,6 @@ allOpen {
 
 noArg {
     annotation("com.jpumpkin.signupapi.common.Domain")
-    invokeInitializers = true
 }
 
 tasks.withType<KotlinCompile> {
