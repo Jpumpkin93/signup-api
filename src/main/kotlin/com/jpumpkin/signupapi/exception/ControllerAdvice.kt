@@ -18,7 +18,7 @@ class ControllerAdvice {
     @ExceptionHandler(Exception::class)
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     fun unknownException(e: Exception): ResponseEntity<ExceptionResponse> {
-        logger.error("알 수 없는 오류 발생 message: ${e.message}, class: ${e.javaClass.name}")
+        logger.error("알 수 없는 오류 발생 message: ${e.message}, class: ${e.javaClass.name}", e)
         return ResponseEntity(
             ExceptionResponse(ApiCode.INTERNAL_SERVER_ERROR),
             HttpStatus.INTERNAL_SERVER_ERROR
